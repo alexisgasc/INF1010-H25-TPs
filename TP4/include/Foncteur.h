@@ -14,7 +14,7 @@ class ComparerPersonne
     // TODO: Implémenter l'opérateur de comparaison pour comparer les noms de deux objets de type T *
 public:
     bool operator()(const shared_ptr<T> &person1, const shared_ptr<T> &person2) const {
-        return person1->nom_ < person2->nom_;
+        return person1->getNom() < person2->getNom();
     }
 };
 
