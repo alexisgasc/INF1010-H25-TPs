@@ -26,7 +26,7 @@ public:
     // TODO: Implémenter l'opérateur de comparaison pour comparer les salaires de deux objets de type T *
     bool operator()(const T *elem1, const T *elem2) const
     {
-        return elem1->salaire_ < elem2->salaire_;
+        return elem1->calculerSalaire() < elem2->calculerSalaire();
     }
 };
 

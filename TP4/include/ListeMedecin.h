@@ -20,7 +20,7 @@ ListeMedecin() {}
     void ajouterMedecin(T *medecin)
     {
         heapMedecin_.push_back(medecin);
-        push_heap(heapMedecin_.begin(), heapMedecin_.end(), ComparerSalaire());
+        push_heap(heapMedecin_.begin(), heapMedecin_.end(), ComparerSalaire<T>());
     }
 
     // TODO: Ajouter un medecin à la priority queue si le type de medecin est U ou de type Z et utiliser push_heap pour maintenir la propriété du heap avec le foncteur ComparerSalaire
@@ -37,7 +37,7 @@ ListeMedecin() {}
     double getSalaireTotal() const
     {
         return accumulate(heapMedecin_.begin(), heapMedecin_.end(), 0.0,
-            [](double& somme, const T* medecin) {
+            [](double somme, const T* medecin) {
                 return somme + medecin->calculerSalaire();
                 }
             );
@@ -55,7 +55,7 @@ ListeMedecin() {}
         if (heapMedecin_.empty()) {
             return nullptr;
         }
-        pop_heap(heapMedecin_.begin(), heapMedecin_.end(), ComparerSalaire());
+        pop_heap(heapMedecin_.begin(), heapMedecin_.end(), ComparerSalaire<T>());
         T* medecinAvecPlusHautSalaire = heapMedecin_.back();
         heapMedecin_.pop_back();
         return medecinAvecPlusHautSalaire;

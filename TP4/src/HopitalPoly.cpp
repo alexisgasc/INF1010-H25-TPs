@@ -58,9 +58,9 @@ set<shared_ptr<Medecin>, ComparerPersonne<Medecin>> HopitalPoly::getMedecinParCr
 // // TODO: compléter la méthode listersi pour qu'elle retourne un pointeur sur le premier medecin qui respecte le critère
 Medecin* HopitalPoly::listersi(const function<bool(const Employe& employe)>& critere) const
 {
-    auto it = find_if(employes_.begin(), employes_.end(), critere);
+    auto it = find_if(employes_.begin(), employes_.end(), [&](const shared_ptr<Employe>& e) { return critere(*e); });
     if (it != employes_.end()) {
-        return dynamic_cast<Medecin*>(it->get());  
+        return dynamic_cast<Medecin*>(it->get());
     }
     return nullptr;
 }
