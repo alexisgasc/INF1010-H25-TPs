@@ -8,7 +8,7 @@ public:
     MedecinRegionEloigne(const string& nom, const string& id, unsigned nbVoyagesEnHelicopteres,  unsigned int niveau = 0);
     float calculerSalaire() const override;
     void visiterPatientEnHelicoptere(shared_ptr<Patient>& p);
-    unsigned getNbVoyagesEnHelicopteres();
+    unsigned getNbVoyagesEnHelicopteres() const ;
     ostream& afficher(ostream& out) const override;
 private:
     unsigned nbVoyagesEnHelicopteres_;

@@ -1,7 +1,7 @@
 #pragma once
 #include "Medecin.h"
 
-class Chirurgien: public Medecin
+class Chirurgien: virtual public Medecin
 {
 public:
     Chirurgien(const string& nom, const string& id, unsigned nbHeuresGarde,  unsigned int niveau = 0);

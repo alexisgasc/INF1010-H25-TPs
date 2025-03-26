@@ -5,15 +5,15 @@
 #include "HopitalPoly.h"
 #include <iostream>
 #include <sstream>
-#include <Foncteur.h>
-#include <ListeMedecin.h>
-#include <MedecinRegionEloigne.h>
+#include "Foncteur.h"
+#include "ListeMedecin.h"
+#include "MedecinRegionEloigne.h"
 
 using namespace std;
 
 int main() {
     TestSuite testSuite;
-    //**************************Test Liste************************************************/
+    /**************************Test Liste************************************************/
 
     testSuite.require("Test ComparerPatient", 1.0, [&]() {
         ComparerPersonne<Patient> comparateur;
@@ -87,18 +87,21 @@ int main() {
                "Erreur: Le calcul du salaire apres avoir vu des patients n'est pas correct.");
     });
 
-
     testSuite.require("Test MedecinRegionEloigne - Visiter patient en helicoptere (Chirurgie)", 1.0, [&]() {
         MedecinRegionEloigne medecin("Dr Stephen Strange", "ID101", 5, 3);
         auto patient = make_shared<Patient>("Patient Chirurgie", 45);
         patient->setTypeSoins(TypeSoins::CHIRURGICAL);
-        
         medecin.visiterPatientEnHelicoptere(patient);
         
-        assert(patient->getAntecedentsMedicaux().size() == 1, 
-               "Erreur: Les antecedents du patient n'ont pas ete correctement mis a jour.");
-        assert(medecin.getNbVoyagesEnHelicopteres() == 6, 
-               "Erreur: Le nombre de voyages en helicoptere n'a pas ete incremente.");
+        assert(patient->getAntecedentsMedicaux().size() == 1,
+            "Erreur: Les antecedents du patient n'ont pas ete correctement mis a jour.");
+        
+        string expectedAntecedent = "Transport medical par helicoptere effectue par Dr Stephen Strange.";
+        assert(patient->getAntecedentsMedicaux()[0] == expectedAntecedent,
+            "Erreur: Le contenu de l'antecedent medical n'est pas correct.");
+        
+        assert(medecin.getNbVoyagesEnHelicopteres() == 6,
+            "Erreur: Le nombre de voyages en helicoptere n'a pas ete incremente.");
     });
 
     testSuite.require("Test MedecinRegionEloigne - Affichage", 1.0, [&]() {
@@ -118,7 +121,6 @@ int main() {
           "Niveau de Pediatre: 3\n"
           "Nombre de voyages en helicoptere: 5\n"
           "Salaire: " + to_string(salaire) + "\n";
-        
         assert(output == expectedOutput,
           "Erreur: L'affichage ne correspond pas exactement a la sortie attendue.");
       });
@@ -171,7 +173,7 @@ int main() {
         delete cardiologue2;
     });
     
-    testSuite.require("Test ListeMedecin - Medecin avec le plus haut salaire", 1.0, [&]() {
+   testSuite.require("Test ListeMedecin - Medecin avec le plus haut salaire", 1.0, [&]() {
         ListeMedecin<Cardiologue> liste;
         Cardiologue* cardiologue1 = new Cardiologue("Dr. Fauci", "ID007", 10, 5, 3);
         Cardiologue* cardiologue2 = new Cardiologue("Dr. Arruda", "ID008", 15, 7, 4);
@@ -369,7 +371,7 @@ int main() {
         assert(salaireTotal == salaireAttendu, "Erreur: Le calcul du salaire total n'est pas correct.");
     });
 
-    // Affichage des resultats des tests
+   //Affichage des resultats des tests
     testSuite.showResults();
 
     return 0;

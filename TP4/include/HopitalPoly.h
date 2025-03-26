@@ -1,9 +1,3 @@
-/**********************************************
- * Titre: Travail pratique #1 - HopitalPoly.h
- * Date:
- * Auteur: 
- *********************************************/
-
 #pragma once
 
 #include <string>

@@ -4,7 +4,7 @@
 #include <memory>
 using namespace std;
 
-class Pediatre: public Medecin
+class Pediatre: virtual public Medecin
 {
 public:
     Pediatre(const string& nom, const string& id, unsigned nbNbEnfantsSoignes, unsigned int niveau = 0);
